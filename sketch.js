@@ -16,12 +16,12 @@ let checkButton; // チェックボタンの参照
 
 function preload() {
   // 画像をロードして配列に保存
-  images[0] = loadImage('https://upload.wikimedia.org/wikipedia/commons/1/15/Red_Apple.jpg', onImageLoad, onImageError); // apple
-  images[1] = loadImage('https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg', onImageLoad, onImageError); // banana
-  images[2] = loadImage('https://upload.wikimedia.org/wikipedia/commons/3/36/Kyoho-grape.jpg', onImageLoad, onImageError); // grape
-  images[3] = loadImage('https://upload.wikimedia.org/wikipedia/commons/c/c4/Orange-Fruit-Pieces.jpg', onImageLoad, onImageError); // orange
-  images[4] = loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Egg_spiral_egg_cup.jpg/640px-Egg_spiral_egg_cup.jpg'); // egg
-    images[5] = loadImage('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/2019_Tesla_Model_3_Long_Range_Dual_Motor_in_Red_Multi-Coat%2C_front_left%2C_2021-05-30.jpg/640px-2019_Tesla_Model_3_Long_Range_Dual_Motor_in_Red_Multi-Coat%2C_front_left%2C_2021-05-30.jpg'); // car
+  images[0] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/f.jpg', onImageLoad, onImageError); // apple
+  images[1] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/e.jpg', onImageLoad, onImageError); // banana
+  images[2] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/d.jpg', onImageLoad, onImageError); // grape
+  images[3] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/c.jpg', onImageLoad, onImageError); // orange
+  images[4] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/b.jpg'); // egg
+    images[5] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/a.jpg'); // car
 }
 
 function setup() {

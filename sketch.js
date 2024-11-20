@@ -1,5 +1,5 @@
 let images = []; // 画像を格納する配列
-let correctAnswers = ["apple", "banana", "grape", "orange", "egg","car"]; // 正しい答えの配列
+let correctAnswers = ["potato", "carrot", "apple", "tomato", "orange","peach","melon","corn","onion","banana"]; // 正しい答えの配列
 let currentQuestion = 0; // 現在の問題番号
 let input;
 let userAnswer = "";

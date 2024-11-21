@@ -16,12 +16,17 @@ let checkButton; // チェックボタンの参照
 
 function preload() {
   // 画像をロードして配列に保存
-  images[0] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/f.jpg', onImageLoad, onImageError); // apple
-  images[1] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/e.jpg', onImageLoad, onImageError); // banana
-  images[2] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/d.jpg', onImageLoad, onImageError); // grape
-  images[3] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/c.jpg', onImageLoad, onImageError); // orange
-  images[4] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/b.jpg'); // egg
-    images[5] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/a.jpg'); // car
+  images[0] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/a.png', onImageLoad, onImageError); // apple
+  images[1] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/b.jpg', onImageLoad, onImageError); // banana
+  images[2] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/c.jpg', onImageLoad, onImageError); // grape
+  images[3] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/d.png', onImageLoad, onImageError); // orange
+  images[4] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/e.jpg'); // egg
+    images[5] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/f.png');
+      images[6] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/g.png');
+      images[7] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/h.jpg');
+      images[8] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/i.jpg');
+      images[9] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/i.jpg');
+     
 }
 
 function setup() {

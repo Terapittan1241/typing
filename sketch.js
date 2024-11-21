@@ -25,7 +25,7 @@ function preload() {
       images[6] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/g.png');
       images[7] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/h.jpg');
       images[8] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/i.jpg');
-      images[9] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/i.jpg');
+      images[9] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/j.jpg');
      
 }
 

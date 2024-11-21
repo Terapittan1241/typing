@@ -3,25 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz App</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
-  <script src="sketch.js"></script>
-  <style>
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #f9f9f9;
-    }
-    #canvas-container {
-      text-align: center;
-    }
-  </style>
+  <title>食べ物クイズ</title>
+  <!-- p5.jsライブラリをCDNから読み込む -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/p5.js"></script>
+  <!-- p5.dom.jsライブラリを読み込む（HTML要素操作用） -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.6.0/addons/p5.dom.js"></script>
+  <!-- ユーザーのスケッチコード -->
+  <script src="sketch.js" defer></script>
 </head>
 <body>
-  <div id="canvas-container"></div>
+  <main>
+    <h1 style="text-align: center;">食べ物クイズ</h1>
+    <p style="text-align: center;">正しい食べ物の名前を入力して答えをチェックしましょう！</p>
+  </main>
 </body>
 </html>

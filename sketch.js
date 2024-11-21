@@ -1,5 +1,5 @@
 let images = []; // 画像を格納する配列
-let correctAnswers = ["potato", "carrot", "apple", "tomato", "orange","peach","melon","corn","onion","banana"]; // 正しい答えの配列
+let correctAnswers = ["potato", "carrot", "apple", "tomato", "orange", "peach", "melon", "corn", "onion", "banana"]; // 正しい答えの配列
 let currentQuestion = 0; // 現在の問題番号
 let input;
 let userAnswer = "";
@@ -16,38 +16,42 @@ let checkButton; // チェックボタンの参照
 
 function preload() {
   // 画像をロードして配列に保存
-  images[0] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/a.png', onImageLoad, onImageError); // apple
-  images[1] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/b.jpg', onImageLoad, onImageError); // banana
-  images[2] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/c.jpg', onImageLoad, onImageError); // grape
-  images[3] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/d.png', onImageLoad, onImageError); // orange
+  images[0] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/a.png'); // apple
+  images[1] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/b.jpg'); // banana
+  images[2] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/c.jpg'); // grape
+  images[3] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/d.png'); // orange
   images[4] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/e.jpg'); // egg
-    images[5] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/f.png');
-      images[6] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/g.png');
-      images[7] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/h.jpg');
-      images[8] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/i.jpg');
-      images[9] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/j.jpg');
-     
+  images[5] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/f.png'); // peach
+  images[6] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/g.png'); // melon
+  images[7] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/h.jpg'); // corn
+  images[8] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/i.jpg'); // onion
+  images[9] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/j.jpg'); // banana
 }
 
 function setup() {
   createCanvas(400, 400);
 
-// スタートボタンを作成
+  // スタートボタンを作成
   startButton = createButton('Start');
   startButton.position(150, 350);
+  startButton.style('font-size', '20px');
+  startButton.style('padding', '10px 20px');
+  startButton.mousePressed(startQuiz);
 
-startButton.mousePressed(startQuiz); // スタートボタンをクリックしたときにstartQuiz関数が呼ばれる
-  
   // テキスト入力フィールドを作成
   input = createInput();
   input.position(100, 320);
- input.hide(); // スタートするまで非表示
+  input.size(180, 40);
+  input.style('font-size', '20px');
+  input.hide();
 
- // 答えをチェックするボタンを作成
+  // 答えをチェックするボタンを作成
   checkButton = createButton('Check Answer');
-  checkButton.position(input.x + input.width + 10, 320);
-  checkButton.mousePressed(checkAnswer); // ボタンクリックでcheckAnswer関数が呼ばれる
-  checkButton.hide(); // スタートするまで非表示
+  checkButton.position(input.x + input.width + 20, 320);
+  checkButton.style('font-size', '20px');
+  checkButton.style('padding', '10px 20px');
+  checkButton.mousePressed(checkAnswer);
+  checkButton.hide();
 }
 
 function draw() {
@@ -60,27 +64,26 @@ function draw() {
     fill(0);
     text("Timer: " + timer + "s", 150, 310);
   }
-  
-  // もしクイズが終了している場合
+
+  // クイズが終了した場合
   if (isFinished) {
     textSize(50);
     fill(0);
     textAlign(CENTER, CENTER);
-    text("Finish", width / 2, height / 2); // 画面中央に「Finish」と表示
+    text("Finish", width / 2, height / 2);
     textSize(24);
-    text("Total Time: " + timer + " seconds", width / 2, height / 2 + 60); // 合計時間を表示
+    text("Total Time: " + timer + " seconds", width / 2, height / 2 + 60);
   } else if (isStarted) {
     // 現在の問題の画像を表示
     if (images[currentQuestion]) {
       image(images[currentQuestion], 100, 80, 190, 190);
     }
 
-
     // 質問メッセージを表示
     textSize(24);
     fill(0);
     text(message1, 100, 35);
-    textSize(19);   
+    textSize(19);
     text(message2, 100, 65);
 
     // 結果メッセージを表示
@@ -92,39 +95,29 @@ function draw() {
 
 function checkAnswer() {
   // ユーザーの入力を取得して小文字に変換
-  userAnswer = input.value().toLowerCase(); 
-  
+  userAnswer = input.value().toLowerCase();
+
   // 答えが正しいかどうかをチェック
   if (userAnswer === correctAnswers[currentQuestion]) {
-    resultMessage = "正解　すごいね" 
-    currentQuestion++; // 次の問題に進む
+    resultMessage = "正解　すごいね！";
+    currentQuestion++;
     input.value(''); // 入力フィールドをクリア
 
-    // もしすべての問題が終了したら
+    // すべての問題が終了したら
     if (currentQuestion >= correctAnswers.length) {
       isFinished = true; // クイズ終了フラグをセット
-      input.hide(); // 入力フィールドを非表示
-      checkButton.hide(); // チェックボタンを非表示
+      input.hide();
+      checkButton.hide();
     }
   } else {
-    resultMessage = "Try again! 残念 間違えたね☆";
-   }
+    resultMessage = "Try again!　もう一度チャレンジしよう！";
+  }
 }
 
 function startQuiz() {
   isStarted = true;
-  startTime = millis(); // クイズ開始時間を記録
-  input.show(); // 入力フィールドを表示
-  checkButton.show(); // チェックボタンを表示
-  startButton.hide(); // スタートボタンを非表示
-}
-
-// 画像のロード成功時の処理
-function onImageLoad() {
-  console.log("Image loaded successfully.");
-}
-
-// 画像のロード失敗時の処理
-function onImageError() {
-  console.error("Failed to load image.");
+  startTime = millis();
+  input.show();
+  checkButton.show();
+  startButton.hide();
 }

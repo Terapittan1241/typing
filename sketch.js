@@ -44,7 +44,7 @@ function preload() {
   imagesLevel2[3] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/m.jpg');// pear
   imagesLevel2[4] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/n.jpg'); // mango
   imagesLevel2[5] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/o.jpg');
-   imagesLevel2[5] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/p.jpg');// watermelon
+   imagesLevel2[6] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/p.jpg');// watermelon
  
   imagesLevel3[0] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/q.jpg'); // kiwi
   imagesLevel3[1] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/r.png'); // peach
@@ -52,8 +52,8 @@ function preload() {
   imagesLevel3[3] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/t.jpg');// pear
   imagesLevel3[4] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/u.jpg'); // mango
   imagesLevel3[5] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/v.jpg');
-   imagesLevel3[4] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/w.jpg'); // mango
-  imagesLevel3[5] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/x.jpg');// watermelon
+   imagesLevel3[6] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/w.jpg'); // mango
+  imagesLevel3[7] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/x.jpg');// watermelon
 }
 }
 

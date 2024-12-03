@@ -3,70 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>フードクイズ</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <title>食べ物クイズ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
+    <h1>食べ物クイズ</h1>
+    <p>初級、中級、上級の中からレベルを選択してください。</p>
 
-<script>
-// 以下にJavaScriptコードを記述します。
-let imagesLevel1 = []; // レベル1の画像を格納する配列
-let imagesLevel2 = []; // レベル2の画像を格納する配列
-let imagesLevel3 = []; // レベル3の画像を格納する配列
-let correctAnswersLevel1 = ["potato", "carrot", "apple", "tomato", "orange", "peach", "melon", "corn", "onion", "banana"]; // レベル1の正しい答えの配列
-let correctAnswersLevel2 = ["cherry", "sausage", "pineapple", "grapes", "strawberry", "mushroom", "cabbage"]; // レベル2の正しい答えの配列
-let correctAnswersLevel3 = ["persimmon", "eggplant", "water melon", "japanese pear", "cucumber", "green papper", "kiwi fruit"]; // レベル3の正しい答えの配列
-let currentQuestion = 0; // 現在の問題番号
-let input;
-let userAnswer = "";
-let message1 = "この食べ物は何でしょう?"; // 質問
-let message2 = "What is this food?"; // 質問
-let resultMessage = ""; // 結果メッセージ
-let isFinished = false; // クイズ終了フラグ
-let startTime; // クイズ開始時間
-let timerLevel1 = 0; // レベル1用タイマー
-let timerLevel2 = 0; // レベル2用タイマー
-let timerLevel3 = 0; // レベル3用タイマー
-let isStarted = false; // クイズ開始フラグ
-let isLevel2 = false; // レベル2のフラグ
-let isLevel3 = false; // レベル3のフラグ
-let startLevel1Button; // レベル1スタートボタンの参照
-let startLevel2Button; // レベル2スタートボタンの参照
-let startLevel3Button; // レベル3スタートボタンの参照
-let checkButton; // チェックボタンの参照
-let replayButton; // もう一度プレイボタンの参照
-
-function preload() {
-  // 画像のロード処理を行います。
-  // レベル1の画像をロードして配列に保存
-  imagesLevel1[0] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/a.png'); // apple
-  // 他の画像も同様にロード...
-  // (画像のロードは略されています)
-}
-
-function setup() {
-  createCanvas(400, 400);
-  // 各ボタンの作成と設定
-}
-
-function draw() {
-  background(255);
-  // タイマーや質問、画像の表示
-}
-
-function checkAnswer() {
-  // 答えのチェック
-}
-
-function startQuiz(level) {
-  // クイズ開始処理
-}
-
-function resetQuiz() {
-  // クイズリセット処理
-}
-
-</script>
-
+    <!-- p5.jsライブラリの読み込み -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
+    
+    <!-- クイズスクリプト -->
+    <script>
+        // ここにあなたのコードを貼り付けてください
+    </script>
 </body>
 </html>

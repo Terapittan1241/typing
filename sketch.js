@@ -1,7 +1,7 @@
 let imagesLevel1 = []; // レベル1の画像を格納する配列
 let imagesLevel2 = []; // レベル2の画像を格納する配列
 let imagesLevel3 = []; // レベル3の画像を格納する配列
-let correctAnswersLevel1 = ["potato", "carrot", "apple", "tomato", "orange","peach","melon","corn","onion","banana]; // レベル1の正しい答えの配列
+let correctAnswersLevel1 = ["potato", "carrot", "apple", "tomato", "orange","peach","melon","corn","onion","banana"]; // レベル1の正しい答えの配列
 let correctAnswersLevel2 = ["cherry", "sausage", "pineapple", "grapes", "strawberry", "mushroom", "cabbage"]; // レベル2の正しい答えの配列
 let correctAnswersLevel3 = ["persimmon", "eggplant", "water melon", "japanese pear", "cucumber", "green papper", "kiwi fruit"]; // レベル3の正しい答えの配列
 let currentQuestion = 0; // 現在の問題番号
@@ -31,30 +31,30 @@ function preload() {
   imagesLevel1[2] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/c.jpg'); // grape
   imagesLevel1[3] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/d.png'); // orange
   imagesLevel1[4] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/e.jpg'); // egg
-  imagesLevel1[5] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/f.png'); // broccoli
-  imagesLevel1[6] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/g.png'); // cucumber
+  imagesLevel1[5] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/f.png'); // apple
+  imagesLevel1[6] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/g.png'); // banana
   imagesLevel1[7] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/h.jpg'); // grape
-  imagesLevel1[8] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/i.jpg'); // strawberry
-  imagesLevel1[9] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/j.jpg'); // pineapple
+  imagesLevel1[8] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/i.jpg'); // orange
+  imagesLevel1[9] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/j.jpg'); // egg
+  // レベル2の画像をロードして配列に保存
+  imagesLevel2[0] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/k.jpg'); // broccoli
+  imagesLevel2[1] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/l.jpg'); // cucumber
+  imagesLevel2[2] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/m1.png'); // grape
+  imagesLevel2[3] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/m.jpg'); // strawberry
+  imagesLevel2[4] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/n.jpg'); // pineapple
+  imagesLevel2[5] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/o.jpg'); // strawberry
+  imagesLevel2[6] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/p.jpg'); // pineapple
 
   // レベル3の画像をロードして配列に保存
-  imagesLevel2[0] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/k.jpg'); // kiwi
-  imagesLevel2[1] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/l.jpg'); // peach
-  imagesLevel2[2] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/m1.png');
-  imagesLevel2[3] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/m.jpg');// pear
-  imagesLevel2[4] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/n.jpg'); // mango
-  imagesLevel2[5] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/o.jpg');
-   imagesLevel2[6] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/p.jpg');// watermelon
- 
   imagesLevel3[0] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/q.jpg'); // kiwi
   imagesLevel3[1] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/r.png'); // peach
-  imagesLevel3[2] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/s.jpg');
-  imagesLevel3[3] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/t.jpg');// pear
-  imagesLevel3[4] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/u.jpg'); // mango
-  imagesLevel3[5] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/v.jpg');
-   imagesLevel3[6] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/w.jpg'); // mango
-  imagesLevel3[7] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/x.jpg');// watermelon
-}
+  imagesLevel3[2] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/s.jpg'); // pear
+  imagesLevel3[3] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/t.jpg'); // mango
+  imagesLevel3[4] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/u.jpg'); // watermelon
+  imagesLevel3[5] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/v.jpg'); // pear
+  imagesLevel3[6] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/w.jpg'); // mango
+  imagesLevel3[7] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/x.jpg'); // watermelon
+  
 }
 
 function setup() {

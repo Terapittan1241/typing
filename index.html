@@ -1,26 +1,168 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>食べ物クイズ</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>食べ物クイズゲーム</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f9fa;
+    }
+  </style>
 </head>
 <body>
-    <h1>食べ物クイズ</h1>
-    <p>初級、中級、上級の中からレベルを選択してください。</p>
+  <script>
+    let imagesLevel1 = []; // レベル1の画像を格納する配列
+    let imagesLevel2 = []; // レベル2の画像を格納する配列
+    let imagesLevel3 = []; // レベル3の画像を格納する配列
+    let correctAnswersLevel1 = ["potato", "carrot", "apple", "tomato", "orange","peach","melon","corn","onion","banana"]; 
+    let correctAnswersLevel2 = ["cherry", "sausage", "pineapple", "grapes", "strawberry", "mushroom", "cabbage"];
+    let correctAnswersLevel3 = ["persimmon", "eggplant", "water melon", "japanese pear", "cucumber", "green papper", "kiwi fruit"];
+    let currentQuestion = 0; 
+    let input;
+    let userAnswer = "";
+    let message1 = "この食べ物は何でしょう?";
+    let message2 = "What is this food?";
+    let resultMessage = ""; 
+    let isFinished = false; 
+    let startTime; 
+    let timerLevel1 = 0; 
+    let timerLevel2 = 0; 
+    let timerLevel3 = 0; 
+    let isStarted = false; 
+    let isLevel2 = false; 
+    let isLevel3 = false; 
+    let startLevel1Button; 
+    let startLevel2Button; 
+    let startLevel3Button; 
+    let checkButton; 
+    let replayButton; 
 
-    <!-- p5.jsライブラリの読み込み -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.js"></script>
-    
-    <!-- クイズスクリプト -->
-    <script>
-        // ここにあなたのコードを貼り付けてください
-    </script>
+    function preload() {
+      imagesLevel1[0] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/a.png'); 
+      imagesLevel1[1] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/b.jpg'); 
+      imagesLevel1[2] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/c.jpg'); 
+      imagesLevel1[3] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/d.png'); 
+      imagesLevel1[4] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/e.jpg'); 
+      imagesLevel1[5] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/f.png'); 
+      imagesLevel1[6] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/g.png'); 
+      imagesLevel1[7] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/h.jpg'); 
+      imagesLevel1[8] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/i.jpg'); 
+      imagesLevel1[9] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/j.jpg'); 
+      imagesLevel2[0] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/k.jpg'); 
+      imagesLevel2[1] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/l.jpg'); 
+      imagesLevel2[2] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/m1.png'); 
+      imagesLevel2[3] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/m.jpg'); 
+      imagesLevel2[4] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/n.jpg'); 
+      imagesLevel2[5] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/o.jpg'); 
+      imagesLevel2[6] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/p.jpg'); 
+      imagesLevel3[0] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/q.jpg'); 
+      imagesLevel3[1] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/r.png'); 
+      imagesLevel3[2] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/s.jpg'); 
+      imagesLevel3[3] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/t.jpg'); 
+      imagesLevel3[4] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/u.jpg'); 
+      imagesLevel3[5] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/v.jpg'); 
+      imagesLevel3[6] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/w.jpg'); 
+      imagesLevel3[7] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/x.jpg');
+    }
+    function setup() {
+      createCanvas(400, 400);
+      startLevel1Button = createButton('Start 初級');
+      startLevel1Button.position(150, 100);
+      startLevel1Button.style('font-size', '24px');
+      startLevel1Button.mousePressed(() => startQuiz(1));
+      startLevel2Button = createButton('Start 中級');
+      startLevel2Button.position(150, 200);
+      startLevel2Button.style('font-size', '24px');
+      startLevel2Button.mousePressed(() => startQuiz(2));
+      startLevel3Button = createButton('Start 上級');
+      startLevel3Button.position(150, 300);
+      startLevel3Button.style('font-size', '24px');
+      startLevel3Button.mousePressed(() => startQuiz(3));
+      input = createInput();
+      input.position(100, 320);
+      input.hide();
+      checkButton = createButton('Check Answer');
+      checkButton.position(input.x + input.width + 10, 320);
+      checkButton.mousePressed(checkAnswer);
+      checkButton.hide();
+      replayButton = createButton('もう一度プレイ');
+      replayButton.position(150, 370);
+      replayButton.style('font-size', '20px');
+      replayButton.mousePressed(resetQuiz);
+      replayButton.hide();
+    }
+    function draw() {
+      background(255);
+      if (isFinished) {
+        textSize(50);
+        fill(0);
+        textAlign(CENTER, CENTER);
+        text("Finish", width / 2, height / 2);
+        replayButton.show();
+      } else if (isStarted) {
+        let currentImages = isLevel3 ? imagesLevel3 : isLevel2 ? imagesLevel2 : imagesLevel1;
+        if (currentImages[currentQuestion]) {
+          image(currentImages[currentQuestion], 100, 80, 190, 190);
+        }
+        textSize(24);
+        fill(0);
+        textAlign(LEFT);
+        text(message1, 100, 35);
+        textSize(20);
+        text(resultMessage, 100, 385);
+      }
+    }
+    function startQuiz(level) {
+      startLevel1Button.hide();
+      startLevel2Button.hide();
+      startLevel3Button.hide();
+      isLevel2 = level === 2;
+      isLevel3 = level === 3;
+      isStarted = true;
+      startTime = millis();
+      currentQuestion = 0;
+      input.show();
+      checkButton.show();
+    }
+    function checkAnswer() {
+      userAnswer = input.value().toLowerCase();
+      let correctAnswers = isLevel3 ? correctAnswersLevel3 : isLevel2 ? correctAnswersLevel2 : correctAnswersLevel1;
+      if (userAnswer === correctAnswers[currentQuestion]) {
+        resultMessage = "正解！";
+        currentQuestion++;
+        input.value('');
+        if ((isLevel2 && currentQuestion >= correctAnswersLevel2.length) ||
+            (isLevel3 && currentQuestion >= correctAnswersLevel3.length) ||
+            (!isLevel2 && !isLevel3 && currentQuestion >= correctAnswersLevel1.length)) {
+          resultMessage = "クリア！";
+          isFinished = true;
+          input.hide();
+          checkButton.hide();
+        }
+      } else {
+        resultMessage = "もう一度試してみて！";
+      }
+    }
+    function resetQuiz() {
+      isStarted = false;
+      isFinished = false;
+      startLevel1Button.show();
+      startLevel2Button.show();
+      startLevel3Button.show();
+      input.hide();
+      checkButton.hide();
+      replayButton.hide();
+      resultMessage = '';
+    }
+  </script>
 </body>
 </html>

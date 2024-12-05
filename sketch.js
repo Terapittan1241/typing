@@ -3,7 +3,7 @@ let imagesLevel2 = []; // レベル2の画像を格納する配列
 let imagesLevel3 = []; // レベル3の画像を格納する配列
 let correctAnswersLevel1 = ["potato", "carrot", "apple", "tomato", "orange","peach","melon","corn","onion","banana"]; // レベル1の正しい答えの配列
 let correctAnswersLevel2 = ["cherry", "sausage", "pineapple", "grapes", "strawberry", "mushroom", "cabbage"]; // レベル2の正しい答えの配列
-let correctAnswersLevel3 = ["persimmon", "eggplant", "water melon", "japanese pear", "cucumber", "green papper", "kiwi fruit"]; // レベル3の正しい答えの配列
+let correctAnswersLevel3 = ["persimmon", "spinach", "eggplant", "water melon", "japanese pear", "cucumber", "green pepper", "kiwi fruit"]; // レベル3の正しい答えの配列
 let currentQuestion = 0; // 現在の問題番号
 let input;
 let userAnswer = "";
@@ -58,12 +58,12 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(windowWidth, windowHeight); // フルスクリーン対応
 
   // レベル1スタートボタンを作成
   startLevel1Button = createButton('Start 初級');
-  startLevel1Button.position(150, 100);
-  startLevel1Button.style('font-size', '24px');
+  startLevel1Button.position(width / 2 - 150, height / 2 - 150); // 画面中央に配置
+  startLevel1Button.style('font-size', '32px');
   startLevel1Button.style('padding', '20px 40px');
   startLevel1Button.style('background-color', '#28a745');
   startLevel1Button.style('color', '#ffffff');
@@ -73,8 +73,8 @@ function setup() {
 
   // レベル2スタートボタンを作成
   startLevel2Button = createButton('Start 中級');
-  startLevel2Button.position(150, 200);
-  startLevel2Button.style('font-size', '24px');
+  startLevel2Button.position(width / 2 - 150, height / 2 - 50); // 画面中央に配置
+  startLevel2Button.style('font-size', '32px');
   startLevel2Button.style('padding', '20px 40px');
   startLevel2Button.style('background-color', '#007bff');
   startLevel2Button.style('color', '#ffffff');
@@ -84,8 +84,8 @@ function setup() {
 
   // レベル3スタートボタンを作成
   startLevel3Button = createButton('Start 上級');
-  startLevel3Button.position(150, 300);
-  startLevel3Button.style('font-size', '24px');
+  startLevel3Button.position(width / 2 - 150, height / 2 + 50); // 画面中央に配置
+  startLevel3Button.style('font-size', '32px');
   startLevel3Button.style('padding', '20px 40px');
   startLevel3Button.style('background-color', '#ff5733');
   startLevel3Button.style('color', '#ffffff');
@@ -95,19 +95,23 @@ function setup() {
 
   // テキスト入力フィールド（回答欄）を作成
   input = createInput();
-  input.position(100, 320);
+  input.position(width / 2 - 250, height - 205);
+  input.size(500,56)
+  input.style('font-size', '40px'); // フォントサイズを調整
   input.hide(); // スタートするまで非表示
 
   // 答えをチェックするボタンを作成
   checkButton = createButton('Check Answer');
-  checkButton.position(input.x + input.width + 10, 320);
+  checkButton.position(input.x + input.width + 10, height -205);
+  checkButton.size(150,64)
+  checkButton.style('font-size', '25px'); // フォントサイズを調整
   checkButton.mousePressed(checkAnswer); // ボタンクリックでcheckAnswer関数が呼ばれる
   checkButton.hide(); // スタートするまで非表示
 
   // もう一度プレイボタンを作成
   replayButton = createButton('もう一度プレイ');
-  replayButton.position(150, 370);
-  replayButton.style('font-size', '20px');
+  replayButton.position(width / 2 - 100, height / 2 + 100);
+  replayButton.style('font-size', '28px');
   replayButton.style('padding', '10px 20px');
   replayButton.style('background-color', '#ffc107');
   replayButton.style('color', '#ffffff');
@@ -123,41 +127,41 @@ function draw() {
   // レベルごとのタイマー表示
   if (isStarted && !isLevel2 && !isLevel3 && !isFinished) {
     timerLevel1 = floor((millis() - startTime) / 1000); // レベル1の経過時間
-    textSize(24);
+    textSize(36);
     fill(0);
-    textAlign(LEFT); // 左揃えでテキストを表示
-    text("Timer: " + timerLevel1 + "s", 100, 310);
+    textAlign(CENTER);
+    text("Timer: " + timerLevel1 + "s", width / 2, 50);
   }
   if (isStarted && isLevel2 && !isLevel3 && !isFinished) {
     timerLevel2 = floor((millis() - startTime) / 1000); // レベル2の経過時間
-    textSize(24);
+    textSize(36);
     fill(0);
-    textAlign(LEFT);
-    text("Timer: " + timerLevel2 + "s", 100, 310);
+    textAlign(CENTER);
+    text("Timer: " + timerLevel2 + "s", width / 2, 50);
   }
   if (isStarted && isLevel3 && !isFinished) {
     timerLevel3 = floor((millis() - startTime) / 1000); // レベル3の経過時間
-    textSize(24);
+    textSize(36);
     fill(0);
-    textAlign(LEFT);
-    text("Timer: " + timerLevel3 + "s", 100, 310);
+    textAlign(CENTER);
+    text("Timer: " + timerLevel3 + "s", width / 2, 50);
   }
 
   // 終了時の処理
   if (isFinished) {
-    textSize(50);
+    textSize(64);
     fill(0);
     textAlign(CENTER, CENTER);
     text("Finish", width / 2, height / 2);
-    textSize(24);
+    textSize(36);
 
     // タイムを表示
     if (!isLevel2 && !isLevel3) {
-      text("初級 タイム: " + timerLevel1 + " 秒", width / 2, height / 2 + 60);
+      text("初級 タイム: " + timerLevel1 + " 秒", width / 2, height / 2 + 80);
     } else if (isLevel2) {
-      text("中級 タイム: " + timerLevel2 + " 秒", width / 2, height / 2 + 60);
+      text("中級 タイム: " + timerLevel2 + " 秒", width / 2, height / 2 + 80);
     } else if (isLevel3) {
-      text("上級 タイム: " + timerLevel3 + " 秒", width / 2, height / 2 + 60);
+      text("上級 タイム: " + timerLevel3 + " 秒", width / 2, height / 2 + 80);
     }
 
     replayButton.show(); // 終了時に「もう一度プレイ」ボタンを表示
@@ -166,22 +170,22 @@ function draw() {
     let currentImages = isLevel3 ? imagesLevel3 : isLevel2 ? imagesLevel2 : imagesLevel1;
 
     if (currentImages[currentQuestion]) {
-      image(currentImages[currentQuestion], 100, 80, 190, 190); // 画像を表示
+      image(currentImages[currentQuestion], width / 2 - 95, height / 2 - 125, 170, 195); // 画像を画面中央に表示
     }
 
     // 質問メッセージを表示
-    textSize(24);
+    textSize(36);
     fill(0);
-    textAlign(LEFT); // 質問文の位置も統一
-    text(message1, 100, 35);
-    textSize(19);   
-    text(message2, 100, 65);
+    textAlign(CENTER);
+    text(message1, width / 2, 120);
+    textSize(28);   
+    text(message2, width / 2, 160);
 
     // 結果メッセージを表示
-    textSize(20);
+    textSize(32);
     fill(0);
-    textAlign(LEFT);
-    text(resultMessage, 100, 385);
+    textAlign(CENTER);
+    text(resultMessage, width / 2, height  -75);
   }
 }
 
@@ -190,7 +194,7 @@ function checkAnswer() {
   let correctAnswers = isLevel3 ? correctAnswersLevel3 : isLevel2 ? correctAnswersLevel2 : correctAnswersLevel1;
 
   if (userAnswer === correctAnswers[currentQuestion]) {
-    resultMessage = "正解　やったね！";
+    resultMessage = "　 　　 正解　やったね！";
     currentQuestion++; // 次の問題に進む
     input.value(''); // 入力フィールドをクリア
 
@@ -214,7 +218,7 @@ function checkAnswer() {
       checkButton.hide(); 
     }
   } else {
-    resultMessage = "Try again!　もう一度チャレンジしよう！";
+    resultMessage = "Try again!　もう一度チャレンジ！";
   }
 }
 
@@ -265,4 +269,16 @@ function resetQuiz() {
   input.hide();
   checkButton.hide();
   replayButton.hide(); 
+}
+
+// ウィンドウサイズが変更された時にキャンバスのサイズを更新する
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  // 各ボタンの位置を中央に再調整
+  startLevel1Button.position(width / 2 - 150, height / 2 - 150);
+  startLevel2Button.position(width / 2 - 150, height / 2 - 50);
+  startLevel3Button.position(width / 2 - 150, height / 2 + 50);
+  input.position(width / 2 - 250, height - 150);
+  checkButton.position(input.x + input.width + 10, height - 150);
+  replayButton.position(width / 2 - 100, height / 2 + 100);
 }

@@ -1,49 +1,25 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Food Typing Quiz</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-        }
-        canvas {
-            display: block;
-        }
-    </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>クイズゲーム</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
 </head>
 <body>
 
 <script>
-let imagesLevel1 = []; 
-let imagesLevel2 = []; 
-let imagesLevel3 = []; 
-let correctAnswersLevel1 = ["potato", "carrot", "apple", "tomato", "orange", "peach", "melon", "corn", "onion", "banana"];
+let imagesLevel1 = []; // レベル1の画像を格納する配列
+let imagesLevel2 = []; // レベル2の画像を格納する配列
+let imagesLevel3 = []; // レベル3の画像を格納する配列
+let correctAnswersLevel1 = ["potato", "carrot", "apple", "tomato", "orange","peach","melon","corn","onion","banana"];
 let correctAnswersLevel2 = ["cherry", "sausage", "pineapple", "grapes", "strawberry", "mushroom", "cabbage"];
 let correctAnswersLevel3 = ["persimmon", "spinach", "eggplant", "water melon", "japanese pear", "cucumber", "green pepper", "kiwi fruit"];
 let currentQuestion = 0;
-let input;
-let userAnswer = "";
-let message1 = "この食べ物は何でしょう?";
-let message2 = "What is this food?";
-let resultMessage = "";
-let isFinished = false;
-let startTime;
-let timerLevel1 = 0;
-let timerLevel2 = 0;
-let timerLevel3 = 0;
-let isStarted = false;
-let isLevel2 = false;
-let isLevel3 = false;
-let startLevel1Button;
-let startLevel2Button;
-let startLevel3Button;
-let checkButton;
-let replayButton;
+let input, userAnswer = "", message1 = "この食べ物は何でしょう?", message2 = "What is this food?";
+let resultMessage = "", isFinished = false, startTime, timerLevel1 = 0, timerLevel2 = 0, timerLevel3 = 0;
+let isStarted = false, isLevel2 = false, isLevel3 = false;
+let startLevel1Button, startLevel2Button, startLevel3Button, checkButton, replayButton;
 
 function preload() {
   imagesLevel1[0] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/a.png');
@@ -56,7 +32,7 @@ function preload() {
   imagesLevel1[7] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/h.jpg');
   imagesLevel1[8] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/i.jpg');
   imagesLevel1[9] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/j.jpg');
-
+  
   imagesLevel2[0] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/k.jpg');
   imagesLevel2[1] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/l.jpg');
   imagesLevel2[2] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/m1.png');
@@ -77,170 +53,67 @@ function preload() {
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-
   startLevel1Button = createButton('Start 初級');
-  startLevel1Button.position(width / 2 - 150, height / 2 - 150);
-  startLevel1Button.style('font-size', '32px');
-  startLevel1Button.style('padding', '20px 40px');
-  startLevel1Button.style('background-color', '#28a745');
-  startLevel1Button.style('color', '#ffffff');
-  startLevel1Button.style('border', 'none');
-  startLevel1Button.style('border-radius', '10px');
-  startLevel1Button.mousePressed(() => startQuiz(1));
-
+  startLevel1Button.position(width / 2 - 150, height / 2 - 150).style('font-size', '32px').style('padding', '20px 40px').style('background-color', '#28a745').style('color', '#ffffff').style('border-radius', '10px').mousePressed(() => startQuiz(1));
   startLevel2Button = createButton('Start 中級');
-  startLevel2Button.position(width / 2 - 150, height / 2 - 50);
-  startLevel2Button.style('font-size', '32px');
-  startLevel2Button.style('padding', '20px 40px');
-  startLevel2Button.style('background-color', '#007bff');
-  startLevel2Button.style('color', '#ffffff');
-  startLevel2Button.style('border', 'none');
-  startLevel2Button.style('border-radius', '10px');
-  startLevel2Button.mousePressed(() => startQuiz(2));
-
+  startLevel2Button.position(width / 2 - 150, height / 2 - 50).style('font-size', '32px').style('padding', '20px 40px').style('background-color', '#007bff').style('color', '#ffffff').style('border-radius', '10px').mousePressed(() => startQuiz(2));
   startLevel3Button = createButton('Start 上級');
-  startLevel3Button.position(width / 2 - 150, height / 2 + 50);
-  startLevel3Button.style('font-size', '32px');
-  startLevel3Button.style('padding', '20px 40px');
-  startLevel3Button.style('background-color', '#ff5733');
-  startLevel3Button.style('color', '#ffffff');
-  startLevel3Button.style('border', 'none');
-  startLevel3Button.style('border-radius', '10px');
-  startLevel3Button.mousePressed(() => startQuiz(3));
-
-  input = createInput();
-  input.position(width / 2 - 250, height - 205);
-  input.size(500, 56);
-  input.style('font-size', '40px');
-  input.hide();
-
-  checkButton = createButton('Check Answer');
-  checkButton.position(input.x + input.width + 10, height - 205);
-  checkButton.size(150, 64);
-  checkButton.style('font-size', '25px');
-  checkButton.mousePressed(checkAnswer);
-  checkButton.hide();
-
-  replayButton = createButton('もう一度プレイ');
-  replayButton.position(width / 2 - 100, height / 2 + 100);
-  replayButton.style('font-size', '28px');
-  replayButton.style('padding', '10px 20px');
-  replayButton.style('background-color', '#ffc107');
-  replayButton.style('color', '#ffffff');
-  replayButton.style('border', 'none');
-  replayButton.style('border-radius', '10px');
-  replayButton.mousePressed(resetQuiz);
-  replayButton.hide();
+  startLevel3Button.position(width / 2 - 150, height / 2 + 50).style('font-size', '32px').style('padding', '20px 40px').style('background-color', '#ff5733').style('color', '#ffffff').style('border-radius', '10px').mousePressed(() => startQuiz(3));
+  
+  input = createInput().position(width / 2 - 250, height - 205).size(500, 56).style('font-size', '40px').hide();
+  checkButton = createButton('Check Answer').position(input.x + input.width + 10, height - 205).size(150, 64).style('font-size', '25px').mousePressed(checkAnswer).hide();
+  replayButton = createButton('もう一度プレイ').position(width / 2 - 100, height / 2 + 100).style('font-size', '28px').style('padding', '10px 20px').style('background-color', '#ffc107').style('color', '#ffffff').style('border-radius', '10px').mousePressed(resetQuiz).hide();
 }
 
 function draw() {
   background(255);
-
-  if (isStarted && !isLevel2 && !isLevel3 && !isFinished) {
-    timerLevel1 = floor((millis() - startTime) / 1000);
-    textSize(36);
-    fill(0);
-    textAlign(CENTER);
-    text("Timer: " + timerLevel1 + "s", width / 2, 50);
+  if (isStarted && !isFinished) {
+    let timer = isLevel3 ? timerLevel3 : isLevel2 ? timerLevel2 : timerLevel1;
+    timer = floor((millis() - startTime) / 1000);
+    textSize(36); fill(0); textAlign(CENTER); text("Timer: " + timer + "s", width / 2, 50);
   }
-
-  if (isStarted && isLevel2 && !isLevel3 && !isFinished) {
-    timerLevel2 = floor((millis() - startTime) / 1000);
-    textSize(36);
-    fill(0);
-    textAlign(CENTER);
-    text("Timer: " + timerLevel2 + "s", width / 2, 50);
-  }
-
-  if (isStarted && isLevel3 && !isFinished) {
-    timerLevel3 = floor((millis() - startTime) / 1000);
-    textSize(36);
-    fill(0);
-    textAlign(CENTER);
-    text("Timer: " + timerLevel3 + "s", width / 2, 50);
-  }
-
   if (isFinished) {
-    textSize(64);
-    fill(0);
-    textAlign(CENTER);
-    text(resultMessage, width / 2, height / 2 - 50);
+    textSize(64); fill(0); textAlign(CENTER, CENTER); text("Finish", width / 2, height / 2); textSize(36);
+    text(`${isLevel3 ? "上級" : isLevel2 ? "中級" : "初級"} タイム: ${isLevel3 ? timerLevel3 : isLevel2 ? timerLevel2 : timerLevel1} 秒`, width / 2, height / 2 + 80);
     replayButton.show();
+  } else if (isStarted) {
+    let currentImages = isLevel3 ? imagesLevel3 : isLevel2 ? imagesLevel2 : imagesLevel1;
+    if (currentImages[currentQuestion]) {
+      image(currentImages[currentQuestion], width / 2 - 95, height / 2 - 125, 170, 195);
+    }
+    textSize(36); fill(0); textAlign(CENTER); text(message1, width / 2, 120); textSize(28); text(message2, width / 2, 160);
+    textSize(32); fill(0); textAlign(CENTER); text(resultMessage, width / 2, height - 75);
   }
 }
 
 function checkAnswer() {
-  userAnswer = input.value().toLowerCase().trim();
-  let correctAnswer;
-  let images;
-
-  if (!isLevel2 && !isLevel3) {
-    correctAnswer = correctAnswersLevel1[currentQuestion];
-    images = imagesLevel1;
-  } else if (isLevel2 && !isLevel3) {
-    correctAnswer = correctAnswersLevel2[currentQuestion];
-    images = imagesLevel2;
-  } else {
-    correctAnswer = correctAnswersLevel3[currentQuestion];
-    images = imagesLevel3;
-  }
-
-  if (userAnswer === correctAnswer) {
+  userAnswer = input.value().toLowerCase(); 
+  let correctAnswers = isLevel3 ? correctAnswersLevel3 : isLevel2 ? correctAnswersLevel2 : correctAnswersLevel1;
+  if (userAnswer === correctAnswers[currentQuestion]) {
+    resultMessage = "正解！やったね！";
     currentQuestion++;
     input.value('');
-
-    if (currentQuestion < images.length) {
-      image(images[currentQuestion], width / 2 - 250, height / 2 - 150, 500, 300);
-    } else {
+    if ((isLevel3 && currentQuestion >= correctAnswersLevel3.length) || (isLevel2 && currentQuestion >= correctAnswersLevel2.length) || (!isLevel2 && !isLevel3 && currentQuestion >= correctAnswersLevel1.length)) {
       isFinished = true;
-      resultMessage = "お疲れさまでした!";
-      replayButton.show();
-      input.hide();
-      checkButton.hide();
     }
   } else {
-    alert('答えが違います。もう一度試してください。');
+    resultMessage = "不正解です！もう一度考えましょう！";
   }
 }
 
 function startQuiz(level) {
   if (level === 1) {
-    isStarted = true;
+    isLevel2 = false; isLevel3 = false;
   } else if (level === 2) {
-    isStarted = true;
-    isLevel2 = true;
-  } else if (level === 3) {
-    isStarted = true;
-    isLevel3 = true;
+    isLevel2 = true; isLevel3 = false;
+  } else {
+    isLevel2 = false; isLevel3 = true;
   }
-  startTime = millis();
-  input.show();
-  checkButton.show();
-  startLevel1Button.hide();
-  startLevel2Button.hide();
-  startLevel3Button.hide();
+  input.show(); checkButton.show(); startTime = millis(); isStarted = true;
 }
 
 function resetQuiz() {
-  isStarted = false;
-  isFinished = false;
-  isLevel2 = false;
-  isLevel3 = false;
-  currentQuestion = 0;
-  timerLevel1 = 0;
-  timerLevel2 = 0;
-  timerLevel3 = 0;
-  input.value('');
-  replayButton.hide();
-  input.hide();
-  checkButton.hide();
-  startLevel1Button.show();
-  startLevel2Button.show();
-  startLevel3Button.show();
-}
-
-function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+  location.reload();
 }
 </script>
 

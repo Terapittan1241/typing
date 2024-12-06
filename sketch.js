@@ -110,7 +110,7 @@ function setup() {
 
   // もう一度プレイボタンを作成
   replayButton = createButton('もう一度プレイ');
-  replayButton.position(width / 2 - 100, height / 2 + 100);
+  replayButton.position(width / 2 - 100, height / 2 + 120);
   replayButton.style('font-size', '28px');
   replayButton.style('padding', '10px 20px');
   replayButton.style('background-color', '#ffc107');

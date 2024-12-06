@@ -18,6 +18,7 @@ let timerLevel3 = 0; // レベル3用タイマー
 let isStarted = false; // クイズ開始フラグ
 let isLevel2 = false; // レベル2のフラグ
 let isLevel3 = false; // レベル3のフラグ
+let showTitle = true; // タイトル表示フラグ
 let startLevel1Button; // レベル1スタートボタンの参照
 let startLevel2Button; // レベル2スタートボタンの参照
 let startLevel3Button; // レベル3スタートボタンの参照
@@ -54,7 +55,6 @@ function preload() {
   imagesLevel3[5] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/v.jpg'); // pear
   imagesLevel3[6] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/w.jpg'); // mango
   imagesLevel3[7] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/x.jpg'); // watermelon
-  
 }
 
 function setup() {
@@ -95,15 +95,15 @@ function setup() {
 
   // テキスト入力フィールド（回答欄）を作成
   input = createInput();
-  input.position(width / 2 - 250, height - 205);
-  input.size(500,56)
+  input.position(width / 2 - 250, height - 250); // 位置を少し上に調整
+  input.size(500,56);
   input.style('font-size', '40px'); // フォントサイズを調整
   input.hide(); // スタートするまで非表示
 
   // 答えをチェックするボタンを作成
   checkButton = createButton('Check Answer');
-  checkButton.position(input.x + input.width + 10, height -205);
-  checkButton.size(150,64)
+  checkButton.position(input.x + input.width + 10, height - 250); // 位置を少し上に調整
+  checkButton.size(150,64);
   checkButton.style('font-size', '25px'); // フォントサイズを調整
   checkButton.mousePressed(checkAnswer); // ボタンクリックでcheckAnswer関数が呼ばれる
   checkButton.hide(); // スタートするまで非表示
@@ -123,6 +123,14 @@ function setup() {
 
 function draw() {
   background(255);
+
+  // タイトル「タイピングゲーム」を表示（クイズ開始前のみ）
+  if (showTitle) {
+    textSize(48);
+    textAlign(CENTER);
+    fill(0);
+    text("タイピングゲーム", width / 2.1, height / 6); // タイトルを上部に表示
+  }
 
   // レベルごとのタイマー表示
   if (isStarted && !isLevel2 && !isLevel3 && !isFinished) {
@@ -185,7 +193,7 @@ function draw() {
     textSize(32);
     fill(0);
     textAlign(CENTER);
-    text(resultMessage, width / 2, height  -75);
+    text(resultMessage, width / 2, height  - 100);
   }
 }
 
@@ -227,6 +235,9 @@ function startQuiz(level) {
   startLevel2Button.hide();
   startLevel3Button.hide();
 
+  // タイトルを非表示にする
+  showTitle = false;
+
   if (level === 1) {
     isLevel2 = false;
     isLevel3 = false; 
@@ -259,6 +270,9 @@ function resetQuiz() {
 
   // テキスト位置のリセットを確実にするため、テキスト設定をリセット
   textAlign(LEFT);
+
+  // タイトルを再表示する
+  showTitle = true;
   
   // スタート画面に戻す
   startLevel1Button.show();
@@ -278,7 +292,7 @@ function windowResized() {
   startLevel1Button.position(width / 2 - 150, height / 2 - 150);
   startLevel2Button.position(width / 2 - 150, height / 2 - 50);
   startLevel3Button.position(width / 2 - 150, height / 2 + 50);
-  input.position(width / 2 - 250, height - 150);
-  checkButton.position(input.x + input.width + 10, height - 150);
+  input.position(width / 2 - 250, height - 250); // 入力欄を少し上に調整
+  checkButton.position(input.x + input.width + 10, height - 250); // チェックボタンの位置も調整
   replayButton.position(width / 2 - 100, height / 2 + 100);
 }

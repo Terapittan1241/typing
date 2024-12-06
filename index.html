@@ -1,122 +1,15 @@
 <!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>タイピングゲーム</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            font-family: Arial, sans-serif;
-        }
+<html lang="en">
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.1/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
 
-        canvas {
-            display: block;
-        }
-
-        button {
-            cursor: pointer;
-        }
-    </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
-</head>
-<body>
-    <script>
-        let imagesLevel1 = [];
-        let imagesLevel2 = [];
-        let imagesLevel3 = [];
-        let correctAnswersLevel1 = ["potato", "carrot", "apple", "tomato", "orange", "peach", "melon", "corn", "onion", "banana"];
-        let correctAnswersLevel2 = ["cherry", "sausage", "pineapple", "grapes", "strawberry", "mushroom", "cabbage"];
-        let correctAnswersLevel3 = ["persimmon", "spinach", "eggplant", "water melon", "japanese pear", "cucumber", "green pepper", "kiwi fruit"];
-        let currentQuestion = 0;
-        let input;
-        let userAnswer = "";
-        let message1 = "この食べ物は何でしょう?";
-        let message2 = "What is this food?";
-        let resultMessage = "";
-        let isFinished = false;
-        let startTime;
-        let timerLevel1 = 0;
-        let timerLevel2 = 0;
-        let timerLevel3 = 0;
-        let isStarted = false;
-        let isLevel2 = false;
-        let isLevel3 = false;
-        let showTitle = true;
-        let startLevel1Button;
-        let startLevel2Button;
-        let startLevel3Button;
-        let checkButton;
-        let replayButton;
-
-        function preload() {
-            imagesLevel1[0] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/a.png');
-            imagesLevel1[1] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/b.jpg');
-            imagesLevel1[2] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/c.jpg');
-            imagesLevel1[3] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/d.png');
-            imagesLevel1[4] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/e.jpg');
-            imagesLevel1[5] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/f.png');
-            imagesLevel1[6] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/g.png');
-            imagesLevel1[7] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/h.jpg');
-            imagesLevel1[8] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/i.jpg');
-            imagesLevel1[9] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/j.jpg');
-
-            imagesLevel2[0] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/k.jpg');
-            imagesLevel2[1] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/l.jpg');
-            imagesLevel2[2] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/m1.png');
-            imagesLevel2[3] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/m.jpg');
-            imagesLevel2[4] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/n.jpg');
-            imagesLevel2[5] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/o.jpg');
-            imagesLevel2[6] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/p.jpg');
-
-            imagesLevel3[0] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/q.jpg');
-            imagesLevel3[1] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/r.png');
-            imagesLevel3[2] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/s.jpg');
-            imagesLevel3[3] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/t.jpg');
-            imagesLevel3[4] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/u.jpg');
-            imagesLevel3[5] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/v.jpg');
-            imagesLevel3[6] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/w.jpg');
-            imagesLevel3[7] = loadImage('https://raw.githubusercontent.com/Terapittan1241/typing/main/x.jpg');
-        }
-
-        function setup() {
-            createCanvas(windowWidth, windowHeight);
-            // ボタン作成処理
-            startLevel1Button = createButton('Start 初級');
-            startLevel1Button.position(width / 2 - 150, height / 2 - 150);
-            startLevel1Button.style('font-size', '32px');
-            startLevel1Button.style('padding', '20px 40px');
-            startLevel1Button.style('background-color', '#28a745');
-            startLevel1Button.style('color', '#ffffff');
-            startLevel1Button.style('border', 'none');
-            startLevel1Button.style('border-radius', '10px');
-            startLevel1Button.mousePressed(() => startQuiz(1));
-            // 同様に他のボタンも作成...
-            //（コードが長くなるため、setup内のボタン生成や各関数は省略していますが、元コードから補完してください）
-        }
-
-        function draw() {
-            background(255);
-            // 描画処理...
-        }
-
-        function startQuiz(level) {
-            // クイズ開始処理...
-        }
-
-        function checkAnswer() {
-            // 答えをチェックする処理...
-        }
-
-        function resetQuiz() {
-            // クイズリセット処理...
-        }
-
-        function windowResized() {
-            resizeCanvas(windowWidth, windowHeight);
-        }
-    </script>
-</body>
+  </head>
+  <body>
+    <main>
+    </main>
+    <script src="sketch.js"></script>
+  </body>
 </html>

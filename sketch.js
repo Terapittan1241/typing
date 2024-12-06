@@ -294,5 +294,5 @@ function windowResized() {
   startLevel3Button.position(width / 2 - 150, height / 2 + 50);
   input.position(width / 2 - 250, height - 250); // 入力欄を少し上に調整
   checkButton.position(input.x + input.width + 10, height - 250); // チェックボタンの位置も調整
-  replayButton.position(width / 2 - 100, height / 2 + 100);
+  replayButton.position(width / 2 - 100, height / 2 + 200);
 }
